@@ -10,3 +10,27 @@ type Person = {
   image: string,
 
 }
+
+// MILESTONE 02
+// Crea un type alias Actress che oltre a tutte le proprietà di Person, aggiunge le seguenti proprietà
+
+type Nationality =
+  | "American"
+  | "British"
+  | "Australian"
+  | " Israeli-American"
+  | "South African"
+  | "French"
+  | "Indian"
+  | "Israeli"
+  | "Spanish"
+  | "South Korean"
+  | "Chinese"
+
+
+
+type Actress = Person & {
+  most_famous_movies: [string, string, string],
+  awards: string,
+  nationality: Nationality
+}
