@@ -37,8 +37,6 @@ type Actress = Person & {
 
 
 // MILESTONE 03
-// Crea una funzione getActress che, dato un id, effettua una chiamata a:
-
 // controllo se  i dati ricevuti hanno la struttura di Actress
 
 function isActress(dati: unknown): dati is Actress {
@@ -77,7 +75,7 @@ function isActress(dati: unknown): dati is Actress {
 }
 
 
-
+// Crea una funzione getActress che, dato un id, effettua una chiamata a:
 async function getActress(id: number): Promise<Actress | null> {
 
   try {
@@ -95,5 +93,31 @@ async function getActress(id: number): Promise<Actress | null> {
   } catch (err) {
     console.log(err);
     return null
+  }
+}
+
+
+
+// MILESTONE 04
+
+async function getAllActresses(): Promise<Actress[]> {
+
+  try {
+    const response = await fetch(`http://localhost:3333/actresses`);
+
+    const data: unknown = await response.json();
+
+    // se i datai non sono array lancia un erroe
+    if (!(data instanceof Array)) {
+      throw new Error("dati non validi")
+    }
+
+    // mantieni attraverso il filter solo gli oggetti validi
+    const actress: Actress[] = data.filter(isActress);
+    return actress;
+
+  } catch (err) {
+    console.log(err);
+    return [];
   }
 }
